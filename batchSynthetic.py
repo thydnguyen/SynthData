@@ -65,6 +65,11 @@ for s,a,c, e ,std ,m,n in itertools.product(size, attributes, classes, equal, ev
         signature = signature + 't'
     else:
         signature = signature + 'f'
+    
+    if n:
+        signature = signature + 't'
+    else:
+        signature = signature + 'f'
 
 
     if e:
