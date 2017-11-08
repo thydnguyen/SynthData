@@ -117,7 +117,7 @@ def make_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
     if noise:
         noise_num = round(len(X) * 10 /100)
         X.extend(np.random.uniform(center_box[0], center_box[1],(noise_num, n_features)))
-        y.extend([max(y)* noise_num])
+        y.extend([max(y)]* noise_num)
     y = np.array(y)
 
 
