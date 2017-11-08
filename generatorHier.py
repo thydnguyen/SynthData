@@ -31,7 +31,7 @@ from random import shuffle as Shuffle
 
 
 def make_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
-               center_box=(-10.0, 10.0), shuffle=True, random_state=None, even_std = True, even_mem = True):
+               center_box=(-10.0, 10.0), shuffle=True, random_state=None, even_std = True, even_mem = True, noise = False):
     separate_factor = 6
     
     cov = make_spd_matrix(n_features)
@@ -114,6 +114,10 @@ def make_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
         y += [i] * n
         
     #X = np.concatenate(X)
+    if noise:
+        noise_num = round(len(X) * 10 /100)
+        X.extend(np.random.uniform(center_box[0], center_box[1],(noise_num, n_features)))
+        y.extend([max(y)* noise_num])
     y = np.array(y)
 
 
@@ -121,7 +125,7 @@ def make_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
 
 
 def uneven_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
-               center_box=(-10.0, 10.0), shuffle=True, random_state=None, even_std = True, even_mem = True):
+               center_box=(-10.0, 10.0), shuffle=True, random_state=None, even_std = True, even_mem = True, noise = False):
     separate_factor = 2
     cov = make_spd_matrix(n_features)
     Cluster_std = []
@@ -202,6 +206,11 @@ def uneven_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
                                                size=(n - 1, ))))
         y += [i] * n
         
+    if noise:
+        noise_num = round(len(X) * 10 /100)
+        X.extend(np.random.uniform(center_box[0], center_box[1],(noise_num, n_features)))
+        y.extend([max(y)* noise_num])
+    y = np.array(y)    
     #X = np.concatenate(X)
     y = np.array(y)
 
