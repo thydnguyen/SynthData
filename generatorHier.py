@@ -116,7 +116,7 @@ def make_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
     #X = np.concatenate(X)
     if noise:
         noise_num = round(len(X) * 10 /100)
-        X.extend(np.random.uniform(center_box[0], center_box[1],(noise_num, n_features)))
+        X.extend(np.random.uniform(np.min(X, axis = 0), np.max(X, axis = 0),(noise_num, n_features)))
         y.extend([max(y)]* noise_num)
     y = np.array(y)
 
@@ -208,11 +208,11 @@ def uneven_blobs(n_samples=100, n_features=2, centers=3, cluster_std=0.5,
         
     if noise:
         noise_num = round(len(X) * 10 /100)
-        X.extend(np.random.uniform(center_box[0], center_box[1],(noise_num, n_features)))
+        X.extend(np.random.uniform(np.min(X, axis = 0), np.max(X, axis = 0),(noise_num, n_features)))
         y.extend([max(y)* noise_num])
     y = np.array(y)    
     #X = np.concatenate(X)
-    y = np.array(y)
+    y = np.array(y)s
 
 
     return X, y
