@@ -14,6 +14,7 @@ signature = 'eff'
 equal = [True, False]
 even_std = [True,False]
 even_mem = [True, False]
+noise = [True, False]
 
 savefolder_d = "D:\\CLS_lab\\codeTest\\batchSynthetic\\dataNewSep\\"
 savefolder_l = "D:\\CLS_lab\\codeTest\\batchSynthetic\\labelNewSep\\"
@@ -41,7 +42,7 @@ makeFolder(savefolder_l)
 pca = PCA(n_components= 2)
 
 
-for s,a,c, e ,std ,m in itertools.product(size, attributes, classes, equal, even_std, even_mem):
+for s,a,c, e ,std ,m,n in itertools.product(size, attributes, classes, equal, even_std, even_mem, noise):
     print("size is: ",s)
     print("attribute is: ", a)
     print("classes is: ",c )
@@ -67,9 +68,9 @@ for s,a,c, e ,std ,m in itertools.product(size, attributes, classes, equal, even
 
 
     if e:
-        data , label = make_blobs(n_samples = s, n_features= a, centers = c, center_box = [-10,10], cluster_std= 0.5, even_std = std, even_mem = m)
+        data , label = make_blobs(n_samples = s, n_features= a, centers = c, center_box = [-10,10], cluster_std= 0.5, even_std = std, even_mem = m, noise = n)
     else:
-        data , label = uneven_blobs(n_samples = s, n_features= a, centers = c, center_box = [-10,10], cluster_std= 0.5, even_std = std, even_mem = m)
+        data , label = uneven_blobs(n_samples = s, n_features= a, centers = c, center_box = [-10,10], cluster_std= 0.5, even_std = std, even_mem = m,noise = n)
     
     label = label + 1
     writeRows(savefolder_d + 's' + str(s) + 'a' + str(a) + 'c' + str(c) + signature + '.csv', data)
